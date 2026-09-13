@@ -1,0 +1,32 @@
+{
+  "name": "blazeaway",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run tests/tally.test.ts tests/config.test.ts",
+    "test:rules": "JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home firebase emulators:exec --only firestore --project demo-quiz-rules \"vitest run tests/rules.test.ts\"",
+    "test": "npm run test:unit && npm run test:rules",
+    "simulate": "JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home firebase emulators:exec --only firestore --project demo-quiz-rules \"tsx scripts/simulate.ts\"",
+    "seed": "tsx scripts/seed.ts",
+    "emulators": "JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home firebase emulators:start --import=./.emulator-data --export-on-exit=./.emulator-data",
+    "seed:dev": "EMULATOR=1 tsx scripts/seed.ts"
+  },
+  "dependencies": {
+    "firebase": "^12.19.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "@types/node": "^26.5.1",
+    "@types/qrcode": "^1.5.6",
+    "firebase-tools": "^15.30.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0"
+  }
+}

@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /games/{g} {
+
+      function isHost() {
+        // Your host UID goes here. The dev one is for the emulator (clients can't pick their UID).
+        return request.auth != null
+            && (request.auth.uid == "YOUR_HOST_UID"
+             || request.auth.uid == "dev-host-fixed-uid");
+      }
+
+      allow read: if request.auth != null;
+      allow write: if isHost();
+
+      match /players/{uid} {
+        // Owner can update: needed to register again after a new seed.
+        allow create, update: if request.auth != null
+                   && request.auth.uid == uid
+                   && request.resource.data.keys().hasOnly(["nickname", "team", "session"])
+                   && request.resource.data.nickname is string
+                   && request.resource.data.nickname.size() >= 1
+                   && request.resource.data.nickname.size() <= 20
+                   && request.resource.data.nickname.matches('.*\\S.*')
+                   && request.resource.data.team is string
+                   && request.resource.data.team.size() >= 1
+                   && request.resource.data.team.size() <= 20
+                   && request.resource.data.session is string
+                   && request.resource.data.session.size() >= 1
+                   && request.resource.data.session.size() <= 40;
+        allow read:   if isHost();
+        allow delete: if isHost(); // kick from the lobby
+      }
+
+      match /answers/{aid} {
+        allow create: if request.auth != null
+                   && request.auth.uid == request.resource.data.uid
+                   && request.resource.data.keys().hasOnly(["q", "uid", "choice", "at", "session"])
+                   && request.resource.data.q is int
+                   && request.resource.data.q >= 0
+                   && request.resource.data.session is string
+                   && request.resource.data.session.size() >= 1
+                   && request.resource.data.session.size() <= 40
+                   && aid == request.resource.data.session + "_"
+                           + string(request.resource.data.q) + "_" + request.auth.uid
+                   && request.resource.data.at == request.time
+                   && request.resource.data.choice is int
+                   && request.resource.data.choice >= 0
+                   && request.resource.data.choice <= 3;
+        allow read:   if isHost();
+        allow update, delete: if false;
+      }
+
+      match /private/{doc} {
+        allow read, write: if isHost();
+      }
+    }
+  }
+}
