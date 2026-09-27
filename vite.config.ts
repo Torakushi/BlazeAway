@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         play: fileURLToPath(new URL("./index.html", import.meta.url)),
         host: fileURLToPath(new URL("./host.html", import.meta.url)),
+        demo: fileURLToPath(new URL("./demo.html", import.meta.url)),
       },
     },
   },

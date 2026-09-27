@@ -17,6 +17,10 @@
       {
         "source": "/host",
         "destination": "/host.html"
+      },
+      {
+        "source": "/demo",
+        "destination": "/demo.html"
       }
     ]
   },

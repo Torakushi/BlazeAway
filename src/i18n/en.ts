@@ -79,4 +79,8 @@ export const en: Strings = {
     writeFail: "Write refused or failed: ",
     pt: "pt",
     pts: "pts",
+    demoTeamA: "Team A",
+    demoTeamB: "Team B",
+    demoEnd: "End of the practice game.",
+    demoReplay: "Play again",
 };

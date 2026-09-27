@@ -38,6 +38,22 @@ npm run dev          # Vite: http://localhost:5173 (player) and /host.html (host
 To restart a game from zero, run `npm run seed:dev` again. Each seed creates a
 new session id. Old answers and registrations from the previous game are ignored.
 
+## Demo mode
+
+`/demo` is a practice game. It runs only in the browser: no Firebase, no host,
+nothing saved. The player picks a name and a team, then plays 4 sample
+questions against virtual players. The timer starts alone, and the answer shows
+right after each question.
+
+Use it to show people how the quiz works before the real day. Send them
+`https://YOUR-PROJECT.web.app/demo`. It uses no Firestore quota and it cannot
+touch the real game.
+
+The demo questions are in `src/demo-questions.ts`. They are public, because
+they are in the page code. Never put real quiz questions there.
+
+Locally: `http://localhost:5173/demo.html`.
+
 ## Tests
 
 ```bash
@@ -159,7 +175,8 @@ npx firebase deploy --only hosting
 ```
 
 Player URL: `https://YOUR-PROJECT.web.app/`. The QR code in the lobby points
-there. Projected screen: `https://YOUR-PROJECT.web.app/host`.
+there. Projected screen: `https://YOUR-PROJECT.web.app/host`. Practice game:
+`https://YOUR-PROJECT.web.app/demo`.
 
 The seed refuses to run if a game is in progress, because it would erase the
 scores. To force it: `FORCE=1 npm run seed`.

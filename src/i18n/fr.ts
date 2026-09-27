@@ -78,6 +78,10 @@ export const fr = {
     writeFail: "Écriture refusée ou échouée : ",
     pt: "pt",
     pts: "pts",
+    demoTeamA: "Équipe A",
+    demoTeamB: "Équipe B",
+    demoEnd: "Fin de la partie d'essai.",
+    demoReplay: "Rejouer",
 } as const;
 
 export type Strings = Record<keyof typeof fr, string>;
