@@ -68,7 +68,7 @@ export const fr = {
     lockedBanner: "Réponses verrouillées",
     answersWord: "réponses",
     thisRound: "Ce tour :",
-    average: "Moyenne :",
+    average: "Bonnes réponses :",
     drumroll: "🥁 Le moment de vérité…",
     allReady: "Tout le monde est prêt ?",
     andWinnerIs: "Et l'équipe gagnante est… 🥁",

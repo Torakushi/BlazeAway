@@ -24,6 +24,7 @@ export const app = (): HTMLElement => el("#app");
 export const SHAPES = ["●", "■", "▲", "◆"] as const;
 export const SHAPE_NAMES = ["circle", "square", "triangle", "diamond"] as const;
 
-export function fmtAvg(n: number): string {
-  return (Math.round(n * 100) / 100).toLocaleString("fr-FR");
+// Team average as a share of right answers, so "0,77" reads as "13 %".
+export function fmtPct(avg: number, questions: number): string {
+  return `${questions > 0 ? Math.round((avg / questions) * 100) : 0}\u00a0%`;
 }

@@ -21,7 +21,7 @@ import {
   type Unsubscribe,
 } from "firebase/firestore";
 import QRCode from "qrcode";
-import { app as appEl, escapeHtml, fmtAvg, frenchPunct, SHAPES } from "./dom";
+import { app as appEl, escapeHtml, fmtPct, frenchPunct, SHAPES } from "./dom";
 import { devHostToken } from "./dev-token";
 import { configureLanguages, initLang, qChoices, qText, t } from "./i18n";
 import { initFontSize, initTheme } from "./theme";
@@ -613,7 +613,7 @@ function renderReveal(g: Game & { phase: "reveal" }): void {
               return `<div class="team-stat team-${i}">
                 <strong>${escapeHtml(tm.name)}</strong>
                 <span>${t("thisRound")} ${s?.roundCorrect ?? 0} / ${s?.roundAnswered ?? 0}</span>
-                <span>${t("average")} ${fmtAvg(s?.avg ?? 0)}</span>
+                <span>${t("average")} ${fmtPct(s?.avg ?? 0, g.qIndex + 1)}</span>
               </div>`;
             })
             .join("")}
@@ -660,7 +660,7 @@ function renderFinal(g: Game & { phase: "final" }): void {
                (tm, i) =>
                  `<div class="team-stat team-${i} ${tm.id === g.winner ? "winning" : ""}">
                     <strong>${tm.id === g.winner ? "🏆 " : ""}${escapeHtml(tm.name)}</strong>
-                    <span>${t("average")} ${fmtAvg(g.averages[tm.id] ?? 0)}</span></div>`
+                    <span>${t("average")} ${fmtPct(g.averages[tm.id] ?? 0, g.total)}</span></div>`
              )
              .join("")}
          </div>`

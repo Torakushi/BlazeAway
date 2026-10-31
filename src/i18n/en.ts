@@ -69,7 +69,7 @@ export const en: Strings = {
     lockedBanner: "Answers locked",
     answersWord: "answers",
     thisRound: "This round:",
-    average: "Average:",
+    average: "Right answers:",
     drumroll: "🥁 The moment of truth…",
     allReady: "Is everyone ready?",
     andWinnerIs: "And the winning team is… 🥁",
