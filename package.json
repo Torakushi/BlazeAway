@@ -13,7 +13,9 @@
     "simulate": "JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home firebase emulators:exec --only firestore --project demo-quiz-rules \"tsx scripts/simulate.ts\"",
     "seed": "tsx scripts/seed.ts",
     "emulators": "JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home firebase emulators:start --import=./.emulator-data --export-on-exit=./.emulator-data",
-    "seed:dev": "EMULATOR=1 tsx scripts/seed.ts"
+    "seed:dev": "EMULATOR=1 tsx scripts/seed.ts",
+    "bots": "tsx scripts/bots.ts",
+    "bots:dev": "EMULATOR=1 tsx scripts/bots.ts"
   },
   "dependencies": {
     "firebase": "^12.19.0",
